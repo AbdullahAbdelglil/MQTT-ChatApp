@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "be2819cb-775f-43f5-a36a-73024a306d86",
+		"name": "Client - Abdullah",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31433233"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/chat/login?username=Abdullah",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Abdullah"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\":\"Hello there\",\r\n    \"topic\":\"chat/group\", \r\n    \"QoS\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/chat/publish",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"topic\":\"chat/group\",\r\n    \"QoS\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/chat/subscribe",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leave Chat",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Messages",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
