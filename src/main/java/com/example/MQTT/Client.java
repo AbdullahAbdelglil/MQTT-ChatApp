@@ -5,8 +5,7 @@ import org.eclipse.paho.client.mqttv3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 public class Client {
 
@@ -15,7 +14,7 @@ public class Client {
     private final IMqttClient client;
 
     //TODO: list to save all received messages
-    private Queue<String> messages = new ArrayDeque<>();
+    private Map<String, Queue<MqttMessage>> messages = new HashMap<>();
 
     public Client(String username) throws MqttException {
         client = new MqttClient(mqttBrokerUrl, username);
@@ -44,6 +43,7 @@ public class Client {
             public void messageArrived(String topic, MqttMessage message) {
                 logger.info("Message arrived. Topic: {}, Qos: {}, Message: {}",
                         topic, message.getQos(), new String(message.getPayload()));
+                saveMessage(topic, message);
             }
 
             @Override
@@ -85,6 +85,16 @@ public class Client {
         } catch (MqttException e) {
             logger.error("Failed to subscribe to topic: {}", topic, e);
         }
+    }
+
+    public void saveMessage(String topic, MqttMessage message) {
+        Queue<MqttMessage> messagesQueue = messages.getOrDefault(topic, new ArrayDeque<>());
+        messagesQueue.add(message);
+        messages.put(topic, messagesQueue);
+    }
+
+    public Queue<MqttMessage> listMessagesOfTopic(String topic) {
+        return messages.getOrDefault(topic, null);
     }
 
     public void disconnectClient() {

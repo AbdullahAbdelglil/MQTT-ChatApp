@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.Queue;
 
 
@@ -55,6 +56,13 @@ public class Controller {
         }
     }
 
+    @GetMapping("/messages")
+    public ResponseEntity<String> listMessages(@PathParam("topic") String topic) {
+        if (client == null) {
+            return ResponseEntity.status(400).body("Not logged in");
+        }
+        return ResponseEntity.status(200).body(client.listMessagesOfTopic(topic).toString());
+    }
 
     @GetMapping("/leave")
     public ResponseEntity<String> closeConnection() {
