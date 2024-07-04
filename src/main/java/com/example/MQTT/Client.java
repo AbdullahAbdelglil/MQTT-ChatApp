@@ -54,7 +54,12 @@ public class Client {
             @Override
             public void deliveryComplete(IMqttDeliveryToken token) {
                 try {
-                    logger.info("Delivery complete: {}", token.getMessage());
+                    MqttMessage message = token.getMessage();
+                    if(message == null) {
+                        logger.info("Delivery complete, but the message is null (likely due to QoS) ");
+                    } else {
+                        logger.info("Delivery complete: {}", token.getMessage());
+                    }
                 } catch (MqttException e) {
                     logger.error("Error in deliveryComplete callback", e);
                 }
