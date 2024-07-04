@@ -1,0 +1,119 @@
+{
+	"info": {
+		"_postman_id": "0ebb7efb-c77a-4d03-8568-eced5402adde",
+		"name": "Client - Abdullah",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31988765",
+		"_collection_link": "https://gold-meadow-878586.postman.co/workspace/My-Workspace~f7f6c038-0756-4825-8cce-a75b049a2b2f/collection/31988765-0ebb7efb-c77a-4d03-8568-eced5402adde?action=share&source=collection_link&creator=31988765"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/chat/login?username=Abdullah",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "Abdullah"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"message\":\"Hello there\",\r\n    \"topic\":\"chat/group\", \r\n    \"QoS\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/chat/publish",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subscribe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"topic\":\"chat/group\",\r\n    \"QoS\":2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/chat/subscribe",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"subscribe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Leave Chat",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Received Messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/chat/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"chat",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
